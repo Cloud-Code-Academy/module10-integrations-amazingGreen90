@@ -29,7 +29,9 @@ public with sharing class DummyJSONCallout {
 
     @future(callout=true)
     public static void callPostCreateDummyJSONUser(String contactId) {
-        postCreateDummyJSONUser(contactId);
+		Contact c = [SELECT Id, FirstName, LastName, Email, Phone FROM Contact WHERE Id = :contactId LIMIT 1];
+
+        postCreateDummyJSONUser(c.Id);
     }
 
 	/* 
